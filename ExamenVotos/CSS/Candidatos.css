@@ -1,0 +1,177 @@
+﻿body {
+    background-color: #858585;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.ocultar-columna {
+    display: none;
+}
+
+form {
+    height: 520px;
+    width: 700px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.gridview-style {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    table-layout: fixed ;
+}
+
+.gridview-style th {
+    background-color: #0e6f9e;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    color: #FFFFFF;
+    vertical-align: central;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.gridview-style td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: central;
+    word-wrap: break-word;
+    white-space: normal;
+    background-color: #f5f5f5;
+}
+.form-group {
+    display: flex;
+    align-items: center;
+    justify-items: left;
+    margin-bottom: 15px;
+    width: 80%;
+    padding-right: 18%;
+}
+
+.labels {
+    font-size: 20px;
+    text-align: left;
+    display: block;
+    margin-right: 10px; 
+}
+
+.texto {
+    border-radius: 10px;
+    padding: 10px;
+    border: 2px solid #0e6f9e;
+    width: 55%;
+    box-sizing: border-box;
+}
+
+.dropdown {
+    border-radius: 10px;
+    padding: 10px;
+    border: 2px solid #0e6f9e;
+    width: 55%;
+    box-sizing: border-box;
+    font-size: 17px;
+}
+
+.guardar {
+    background-color: #2fb500;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 50px;
+    float: right;
+}
+
+.editar {
+    background-color: #f5a10e;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 50px;
+}
+
+.eliminar{
+    background-color: #ca0000;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 50px;
+}
+
+.group-btn {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-left: 25%;
+}
+
+
+.gridview-style th:nth-child(1),
+.gridview-style td:nth-child(1) {
+    width: 50px; 
+}
+
+.gridview-style th:nth-child(2),
+.gridview-style td:nth-child(2) {
+    width: 150px;
+}
+
+.gridview-style th:nth-child(3),
+.gridview-style td:nth-child(3) {
+    width: 250px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #055197;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.active {
+    background-color: #04AA6D;
+}
+
+li a:hover {
+    background-color: #111;
+}
