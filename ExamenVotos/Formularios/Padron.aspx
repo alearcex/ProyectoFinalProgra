@@ -8,8 +8,10 @@
     <link href="../CSS/Padron.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-     <ul>
-        <li><a class="active"  href="Padron.aspx">Padrón</a></li>
+    <ul>
+        <li><a href="Votos.aspx">Votar</a></li>
+        <li><a href="Estadisticas.aspx">Estadísticas</a></li>
+        <li><a class="active" href="Padron.aspx">Padrón</a></li>
         <li><a href="Candidatos.aspx">Candidatos</a></li>
         <li><a href="Partidos.aspx">Partidos</a></li>
         <li><a href="LogIn.aspx">Salir</a></li>
@@ -40,19 +42,13 @@
             <asp:Button ID="btnGuardar" runat="server" Text="Guardar" OnClick="btnGuardar_Click" CssClass="guardar" />
         </div>
         <br />
-        <asp:GridView ID="GridPadron" runat="server" AutoGenerateColumns="False" CssClass="gridview-style" OnRowCommand="AccionesGrid">
+        <asp:GridView ID="GridPadron" runat="server" AutoGenerateColumns="False" CssClass="gridview-style">
             <Columns>
                 <asp:BoundField DataField="Cedula" HeaderText="Cédula" ReadOnly="True" SortExpression="Cedula" />
                 <asp:BoundField DataField="Nombre" HeaderText="Nombre" ReadOnly="True" SortExpression="Nombre" />
                 <asp:BoundField DataField="PrimerApellido" HeaderText="Primer Apellido" ReadOnly="True" SortExpression="PrimerApellido" />
                 <asp:BoundField DataField="SegundoApellido" HeaderText="Segundo Apellido" ReadOnly="True" SortExpression="SegundoApellido" />
                 <asp:BoundField DataField="Edad" HeaderText="Edad" ReadOnly="True" SortExpression="Edad" />
-                <asp:ButtonField ButtonType="Button" Text="Editar" CommandName="EDITAR" ControlStyle-CssClass="editar">
-                    <ControlStyle CssClass="editar"></ControlStyle>
-                </asp:ButtonField>
-                <asp:ButtonField ButtonType="Button" Text="Eliminar" CommandName="ELIMINAR" ControlStyle-CssClass="eliminar">
-                    <ControlStyle CssClass="eliminar"></ControlStyle>
-                </asp:ButtonField>
             </Columns>
         </asp:GridView>
     </form>

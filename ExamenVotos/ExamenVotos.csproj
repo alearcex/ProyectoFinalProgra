@@ -67,67 +67,70 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CSS\Partidos.css" />
-    <Content Include="CSS\Padron.css" />
+    <Content Include="CSS\Estadisticas.css" />
     <Content Include="CSS\Candidatos.css" />
+    <Content Include="CSS\Partidos.css" />
     <Content Include="CSS\Tribunal.jpg" />
     <Content Include="CSS\Votos.css" />
     <Content Include="CSS\LogIn.css" />
+    <Content Include="Formularios\Estadisticas.aspx" />
     <Content Include="SQL\Query.sql" />
-    <Content Include="Web\Formularios\Candidatos.aspx" />
-    <Content Include="Web\Formularios\LogIn.aspx" />
-    <Content Include="Web\Formularios\Padron.aspx" />
-    <Content Include="Web\Formularios\Partidos.aspx" />
-    <Content Include="Web\Formularios\Votos.aspx" />
+    <Content Include="Formularios\Candidatos.aspx" />
+    <Content Include="Formularios\LogIn.aspx" />
+    <Content Include="Formularios\Padron.aspx" />
+    <Content Include="Formularios\Partidos.aspx" />
+    <Content Include="Formularios\Votos.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\CandidatosCore.cs" />
-    <Compile Include="Business\PadronCore.cs" />
-    <Compile Include="Business\PartidosCore.cs" />
-    <Compile Include="Business\LogInCore.cs" />
-    <Compile Include="Business\VotosCore.cs" />
-    <Compile Include="DAL\CandidatosDAO.cs" />
-    <Compile Include="DAL\PadronDAO.cs" />
-    <Compile Include="DAL\PartidosDAO.cs" />
-    <Compile Include="DAL\LogInDAO.cs" />
-    <Compile Include="DAL\VotosDAO.cs" />
-    <Compile Include="Web\Formularios\Candidatos.aspx.cs">
+    <Compile Include="AccesoDatos\CandidatosDAL.cs" />
+    <Compile Include="AccesoDatos\PadronDAL.cs" />
+    <Compile Include="AccesoDatos\PartidosDAL.cs" />
+    <Compile Include="AccesoDatos\LogInDAL.cs" />
+    <Compile Include="AccesoDatos\VotosDAL.cs" />
+    <Compile Include="Formularios\Candidatos.aspx.cs">
       <DependentUpon>Candidatos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Web\Formularios\Candidatos.aspx.designer.cs">
+    <Compile Include="Formularios\Candidatos.aspx.designer.cs">
       <DependentUpon>Candidatos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Web\Formularios\LogIn.aspx.cs">
+    <Compile Include="Formularios\Estadisticas.aspx.cs">
+      <DependentUpon>Estadisticas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios\Estadisticas.aspx.designer.cs">
+      <DependentUpon>Estadisticas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\LogIn.aspx.cs">
       <DependentUpon>LogIn.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Web\Formularios\LogIn.aspx.designer.cs">
+    <Compile Include="Formularios\LogIn.aspx.designer.cs">
       <DependentUpon>LogIn.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Web\Formularios\Padron.aspx.cs">
+    <Compile Include="Formularios\Padron.aspx.cs">
       <DependentUpon>Padron.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Web\Formularios\Padron.aspx.designer.cs">
+    <Compile Include="Formularios\Padron.aspx.designer.cs">
       <DependentUpon>Padron.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Web\Formularios\Partidos.aspx.cs">
+    <Compile Include="Formularios\Partidos.aspx.cs">
       <DependentUpon>Partidos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Web\Formularios\Partidos.aspx.designer.cs">
+    <Compile Include="Formularios\Partidos.aspx.designer.cs">
       <DependentUpon>Partidos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Web\Formularios\Votos.aspx.cs">
+    <Compile Include="Formularios\Votos.aspx.cs">
       <DependentUpon>Votos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Web\Formularios\Votos.aspx.designer.cs">
+    <Compile Include="Formularios\Votos.aspx.designer.cs">
       <DependentUpon>Votos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="DAL\ConexionBD.cs" />
+    <Compile Include="AccesoDatos\ConexionBD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

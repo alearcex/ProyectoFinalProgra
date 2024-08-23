@@ -9,6 +9,8 @@
 </head>
 <body>
     <ul>
+        <li><a href="Votos.aspx">Votar</a></li>
+        <li><a href="Estadisticas.aspx">Estadísticas</a></li>
         <li><a href="Padron.aspx">Padrón</a></li>
         <li><a href="Candidatos.aspx">Candidatos</a></li>
         <li><a class="active" href="Partidos.aspx">Partidos</a></li>
@@ -18,8 +20,6 @@
         <h1>Gestión de Partidos</h1>
         <br />
         <div class="form-group">
-            <asp:Label ID="lblIdPartido" runat="server" Text="ID Partido" CssClass="labels"></asp:Label>
-            <asp:TextBox ID="txtIdPartido" runat="server" CssClass="texto" Enabled="False"></asp:TextBox>
             <asp:Label ID="lblDescripcion" runat="server" Text="Descripción" CssClass="labels"></asp:Label>
             <asp:TextBox ID="txtDescripcion" runat="server" CssClass="texto"></asp:TextBox>
         </div>
@@ -29,12 +29,10 @@
             <asp:Button ID="btnGuardar" runat="server" Text="Guardar" OnClick="btnGuardar_Click" CssClass="guardar" />
         </div>
         <br />
-        <asp:GridView ID="GridPartidos" runat="server" AutoGenerateColumns="False" CssClass="gridview-style" OnRowCommand="AccionesGrid">
+        <asp:GridView ID="GridPartidos" runat="server" AutoGenerateColumns="False" CssClass="gridview-style">
             <Columns>
                 <asp:BoundField DataField="IdPartido" HeaderText="ID" ReadOnly="True" SortExpression="IdPartido" />
                 <asp:BoundField DataField="Descripcion" HeaderText="Descripción" SortExpression="Descripcion" />
-                <asp:ButtonField ButtonType="Button" Text="Editar" CommandName="EDITAR" ControlStyle-CssClass="editar" />
-                <asp:ButtonField ButtonType="Button" Text="Eliminar" CommandName="ELIMINAR" ControlStyle-CssClass="eliminar" />
             </Columns>
         </asp:GridView>
     </form>

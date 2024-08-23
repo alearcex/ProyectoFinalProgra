@@ -1,5 +1,4 @@
-﻿using ExamenVotos.Business;
-using ExamenVotos.DAL;
+﻿using ExamenVotos.AccesoDatos;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -22,11 +21,11 @@ namespace ExamenVotos.Formularios
 
         protected void LlenarGridCandidatos()
         {
-            GridCandidatos.DataSource = VotosCore.ConsultaCandidatos(conn);
+            GridCandidatos.DataSource = VotosDAL.ConsultaCandidatos(conn);
             GridCandidatos.DataBind();
         }
 
-        protected void AccionesGrid(object sender, GridViewCommandEventArgs e)
+        protected void GuardarVoto(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "VOTAR")
             {
@@ -37,16 +36,29 @@ namespace ExamenVotos.Formularios
                 int idCandidato = Convert.ToInt32(fila.Cells[0].Text);
                 DateTime fecha = DateTime.Now;
 
-                VotosDAO voto = new VotosDAO(cedula, idCandidato, fecha);
-                int resp = VotosCore.GuardarVoto(voto, conn);
+                VotosDAL voto = new VotosDAL(cedula, idCandidato, fecha);
+                int existeVoto = VotosDAL.ValidarVoto(cedula, conn);
 
-                if (resp != 0)
+                if (existeVoto == 0) 
                 {
-                    MostrarMensaje("Ocurrió un error al registrar el voto.");
+                    int resp = VotosDAL.GuardarVoto(voto, conn);
+
+                    if (resp == -1)
+                    {
+                        MostrarMensaje("Ocurrió un error al registrar el voto.");
+                    }
+                    else
+                    {
+                        MostrarMensaje("El voto se registró correctamente.");
+                    }
+                }
+                else if(existeVoto > 0)
+                {
+                    MostrarMensaje("Ya hay un voto registrado con esta cédula.");
                 }
                 else
                 {
-                    MostrarMensaje("El voto se registró correctamente.");
+                    MostrarMensaje("Ocurrió un error al registrar el voto.");
                 }
             }
         }

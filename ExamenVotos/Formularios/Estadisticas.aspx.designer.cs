@@ -11,7 +11,7 @@ namespace ExamenVotos.Formularios
 {
 
 
-    public partial class Partidos
+    public partial class Estadisticas
     {
 
         /// <summary>
@@ -24,66 +24,48 @@ namespace ExamenVotos.Formularios
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// Control lblIdPartido.
+        /// Control lblTotalVotos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblIdPartido;
+        protected global::System.Web.UI.WebControls.Label lblTotalVotos;
 
         /// <summary>
-        /// Control txtIdPartido.
+        /// Control lblPorcVotantes.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdPartido;
+        protected global::System.Web.UI.WebControls.Label lblPorcVotantes;
 
         /// <summary>
-        /// Control lblDescripcion.
+        /// Control lblPorcAbstinencia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDescripcion;
+        protected global::System.Web.UI.WebControls.Label lblPorcAbstinencia;
 
         /// <summary>
-        /// Control txtDescripcion.
+        /// Control gvCandidatos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
+        protected global::System.Web.UI.WebControls.GridView gvCandidatos;
 
         /// <summary>
-        /// Control btnLimpiar.
+        /// Control gvPartidos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLimpiar;
-
-        /// <summary>
-        /// Control btnGuardar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGuardar;
-
-        /// <summary>
-        /// Control GridPartidos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridPartidos;
+        protected global::System.Web.UI.WebControls.GridView gvPartidos;
     }
 }
