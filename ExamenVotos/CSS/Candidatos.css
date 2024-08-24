@@ -74,7 +74,6 @@ form {
     border: 2px solid #0e6f9e;
     width: 55%;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
 }
 
 .dropdown {
@@ -99,6 +98,29 @@ form {
     float: right;
 }
 
+.editar {
+    background-color: #f5a10e;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 50px;
+}
+
+.eliminar{
+    background-color: #ca0000;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 50px;
+}
 
 .group-btn {
     display: flex;

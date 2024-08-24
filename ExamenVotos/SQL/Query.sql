@@ -1,4 +1,3 @@
-CREATE DATABASE Examen2
 USE [Examen2]
 GO
 Create Table Candidatos(
@@ -24,7 +23,7 @@ Edad INT CHECK (Edad >= 18)
 )
 
 Create Table Votos(
-IdVoto int Identity Primary Key not null,
+IdVoto int Primary Key not null,
 Cedula varchar(9) not null,
 IdCandidato int not null,
 Fecha datetime
@@ -37,44 +36,189 @@ Cedula varchar(9) Primary Key not null,
 Contraseña Varchar(8) not null
 )
 
-INSERT INTO Padron (Cedula, Nombre, PrimerApellido, SegundoApellido, Edad) VALUES
-('123456789', 'Juan', 'Gómez', 'Mora', 35),
-('234567890', 'Ana', 'Ramírez', 'Castro', 28),
-('345678901', 'Carlos', 'Pérez', 'Vargas', 42),
-('456789012', 'María', 'Hernández', 'Soto', 30),
-('567890123', 'Luis', 'Morales', 'Jiménez', 55),
-('678901234', 'Laura', 'Gutiérrez', 'Montero', 25),
-('789012345', 'Miguel', 'Cordero', 'Quirós', 40),
-('890123456', 'Isabel', 'Cruz', 'Martínez', 33),
-('901234567', 'Roberto', 'Alvarado', 'Rojas', 47),
-('012345678', 'Patricia', 'Segura', 'Salazar', 29)
 
-INSERT INTO Partidos (Descripcion) VALUES
-('Liberación Nacional'),
-('Acción Ciudadana'),
-('Partido Random')
+-- ===========================================================
+-- Author:       Alessandro Arce Chaves
+-- Create date: 02/08/2024
+-- Description: SP que valida las credenciales del usuario
+-- ===========================================================
+ALTER PROCEDURE ValidarUsuarioSP
+    @cedula VARCHAR(9),
+    @contra VARCHAR(50)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    IF EXISTS (SELECT 1 
+               FROM Usuarios 
+               WHERE Cedula = @cedula 
+               AND Contraseña = @contra)
+    BEGIN
+        SELECT 1 AS Resultado;
+    END
+    ELSE
+    BEGIN
+        SELECT 0 AS Resultado;
+    END
+END
+GO
 
-INSERT INTO Candidatos (Cedula, IdPartido) VALUES
-('123456789', 1), 
-('234567890', 2),  
-('345678901', 3) 
+-- =============================================
+-- Author:       Alessandro Arce Chaves
+-- Create date: 02/08/2024
+-- Description: Sp que maneja las consultas 
+--              necesarias para la tabla Candidatos
+-- =============================================
+ALTER PROCEDURE [dbo].[CandidatosSP]
+    @accion varchar(10),
+    @idCandidato int = NULL,
+    @cedula varchar(9) = NULL,
+    @idPartido int = NULL
+AS
+BEGIN
+    IF @accion = 'GUARDAR'
+    BEGIN
+        IF EXISTS (SELECT 1 FROM Candidatos WHERE Cedula = @cedula)
+        BEGIN
+            UPDATE Candidatos
+            SET IdPartido = @idPartido
+            WHERE Cedula = @cedula
+        END
+        ELSE
+        BEGIN
+            INSERT INTO Candidatos (Cedula, IdPartido)
+            VALUES (@cedula, @idPartido)
+        END
+    END
+    
+    IF @accion = 'EDITAR'
+    BEGIN
+        UPDATE Candidatos
+        SET Cedula = @cedula,
+            IdPartido = @idPartido
+        WHERE IdCandidato = @idCandidato
+    END
+    
+    IF @accion = 'ELIMINAR'
+    BEGIN
+        DELETE FROM Candidatos
+        WHERE IdCandidato = @idCandidato
+    END
 
-INSERT INTO Votos (IdVoto, Cedula, IdCandidato, Fecha) VALUES
-(1, '123456789', 1, '2024-08-01'),
-(2, '234567890', 2, '2024-08-02'),
-(3, '345678901', 3, '2024-08-03'),
-(4, '456789012', 1, '2024-08-04'),
-(5, '567890123', 2, '2024-08-05'),
-(6, '678901234', 3, '2024-08-06');
+    IF @accion = 'SELECT'
+    BEGIN
+        SELECT c.IdCandidato, c.Cedula, c.IdPartido, p.Descripcion
+        FROM Candidatos c
+		INNER JOIN Partidos p ON p.IdPartido = c.IdPartido
+    END
+END
 
-INSERT INTO Usuarios (Cedula, Contraseña) VALUES
-('123456789', 'tse6789'),
-('234567890', 'tse7890'),
-('345678901', 'tse8901'),
-('456789012', 'tse9012'),
-('567890123', 'tse0123'),
-('678901234', 'tse1234'),
-('789012345', 'tse2345'),
-('890123456', 'tse3456'),
-('901234567', 'tse4567'),
-('012345678', 'tse5678');
+USE [Examen2]
+GO
+/****** Object:  StoredProcedure [dbo].[PadronSP]    Script Date: 17/08/2024 01:44:45 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Alessandro Arce Chaves
+-- Create date: 02/08/2024
+-- Description: Sp que maneja las consultas 
+--				necesarias para el examen 2
+-- =============================================
+ALTER PROCEDURE [dbo].[PadronSP]
+	@accion varchar(10),
+	@cedula varchar(10),
+	@nombre varchar(15) = NULL,
+	@apellido1 varchar(15) = NULL,
+	@apellido2 varchar(15) = NULL,
+	@edad int = NULL
+AS
+BEGIN
+	IF @accion = 'GUARDAR'
+    BEGIN
+        IF EXISTS (SELECT 1 FROM Examen2.dbo.Padron WHERE Cedula = @cedula)
+        BEGIN
+            UPDATE Examen2.dbo.Padron
+            SET Nombre = @nombre,
+                PrimerApellido = @apellido1,
+                SegundoApellido = @apellido2,
+                Edad = @edad
+            WHERE Cedula = @cedula
+        END
+        ELSE
+        BEGIN
+            INSERT INTO Examen2.dbo.Padron (Cedula, Nombre, PrimerApellido, SegundoApellido, Edad)
+            VALUES (@cedula, @nombre, @apellido1, @apellido2, @edad)
+			
+			INSERT INTO Examen2.dbo.Usuarios(Cedula, Contraseña)
+            VALUES (@cedula, 'tse' + RIGHT(REPLICATE('0', 4) + @cedula, 4))
+
+        END
+    END
+    
+	IF @accion = 'ELIMINAR'
+    BEGIN
+		DELETE FROM Examen2.dbo.Usuarios
+        WHERE Cedula = @cedula
+
+		DELETE FROM Examen2.dbo.Candidatos
+        WHERE Cedula = @cedula	
+
+		DELETE FROM Examen2.dbo.Votos
+        WHERE Cedula = @cedula
+
+		DELETE FROM Examen2.dbo.Padron
+        WHERE Cedula = @cedula
+
+    END
+
+    IF @accion = 'SELECT'
+    BEGIN
+        SELECT Cedula, Nombre, PrimerApellido, SegundoApellido, Edad
+        FROM Examen2.dbo.Padron
+    END
+END
+
+-- =============================================
+-- Author:		Alessandro Arce Chaves
+-- Create date: 02/08/2024
+-- Description: SP que maneja las consultas 
+--				necesarias para la tabla Partidos
+-- =============================================
+ALTER PROCEDURE [dbo].[PartidosSP]
+    @accion VARCHAR(10),
+    @idPartido INT = NULL,
+    @descripcion VARCHAR(30) = NULL
+AS
+BEGIN
+    IF @accion = 'GUARDAR'
+    BEGIN
+        IF EXISTS (SELECT 1 FROM Partidos WHERE IdPartido = @idPartido)
+        BEGIN
+            UPDATE Partidos
+            SET Descripcion = @descripcion
+            WHERE IdPartido = @idPartido
+        END
+        ELSE
+        BEGIN
+            INSERT INTO Partidos (Descripcion)
+            VALUES (@descripcion)
+        END
+    END
+
+    IF @accion = 'ELIMINAR'
+    BEGIN
+	    DELETE FROM Candidatos
+        WHERE IdPartido = @idPartido
+
+        DELETE FROM Partidos
+        WHERE IdPartido = @idPartido
+    END
+
+    IF @accion = 'SELECT'
+    BEGIN
+        SELECT IdPartido, Descripcion
+        FROM Partidos
+    END
+END

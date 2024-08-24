@@ -1,4 +1,6 @@
-﻿using ExamenVotos.AccesoDatos;
+﻿using ExamenVotos.Business;
+using ExamenVotos.DAL;
+using ExamenVotos.Modelo;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -27,16 +29,15 @@ namespace ExamenVotos.Formularios
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
             #region Validaciones
-            if (string.IsNullOrEmpty(txtCedula.Text) || string.IsNullOrEmpty(txtPassword.Text))            
-            {
+            if (string.IsNullOrEmpty(txtCedula.Text) || string.IsNullOrEmpty(txtPassword.Text))            {
                 MostrarMensaje("Todos los campos son obligatorios.");
                 return;
             }
             #endregion
 
-            LogInDAL datos = new LogInDAL(txtCedula.Text, txtPassword.Text);
+            LogInDAO datos = new LogInDAO(txtCedula.Text, txtPassword.Text);
 
-            var resultado = LogInDAL.ValidarIngreso(datos, conn);
+            var resultado = LogInCore.ValidarIngreso(datos, conn);
 
             switch (resultado)
             {
@@ -47,8 +48,15 @@ namespace ExamenVotos.Formularios
                     MostrarMensaje("Ha ocurrido un error al conectar con la base de datos.");
                     break;
                 default:
+                    if (txtCedula.Text.Equals("admin"))
+                    {
+                        Response.Redirect("Padron.aspx");
+                    }
+                    else
+                    {
                         Session["CedulaUsuario"] = txtCedula.Text;
-                        Response.Redirect("Votos.aspx");
+                        Response.Redirect("Votos.aspx"); 
+                    }
                     break;
             }
         }

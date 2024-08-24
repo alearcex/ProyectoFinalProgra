@@ -1,4 +1,5 @@
-﻿using ExamenVotos.AccesoDatos;
+﻿using ExamenVotos.Business;
+using ExamenVotos.DAL;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -21,11 +22,11 @@ namespace ExamenVotos.Formularios
 
         protected void LlenarGridCandidatos()
         {
-            GridCandidatos.DataSource = VotosDAL.ConsultaCandidatos(conn);
+            GridCandidatos.DataSource = VotosCore.ConsultaCandidatos(conn);
             GridCandidatos.DataBind();
         }
 
-        protected void GuardarVoto(object sender, GridViewCommandEventArgs e)
+        protected void AccionesGrid(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "VOTAR")
             {
@@ -36,29 +37,16 @@ namespace ExamenVotos.Formularios
                 int idCandidato = Convert.ToInt32(fila.Cells[0].Text);
                 DateTime fecha = DateTime.Now;
 
-                VotosDAL voto = new VotosDAL(cedula, idCandidato, fecha);
-                int existeVoto = VotosDAL.ValidarVoto(cedula, conn);
+                VotosDAO voto = new VotosDAO(cedula, idCandidato, fecha);
+                int resp = VotosCore.GuardarVoto(voto, conn);
 
-                if (existeVoto == 0) 
+                if (resp != 0)
                 {
-                    int resp = VotosDAL.GuardarVoto(voto, conn);
-
-                    if (resp == -1)
-                    {
-                        MostrarMensaje("Ocurrió un error al registrar el voto.");
-                    }
-                    else
-                    {
-                        MostrarMensaje("El voto se registró correctamente.");
-                    }
-                }
-                else if(existeVoto > 0)
-                {
-                    MostrarMensaje("Ya hay un voto registrado con esta cédula.");
+                    MostrarMensaje("Ocurrió un error al registrar el voto.");
                 }
                 else
                 {
-                    MostrarMensaje("Ocurrió un error al registrar el voto.");
+                    MostrarMensaje("El voto se registró correctamente.");
                 }
             }
         }

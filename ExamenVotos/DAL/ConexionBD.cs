@@ -8,7 +8,7 @@ namespace ExamenVotos.Modelo
 {
     public class ConexionBD
     {
-        public static SqlConnection obtenerConexion()
+        public static SqlConnection obtenerConexionuh()
         {
             string rutaconexion = System.Configuration.ConfigurationManager.ConnectionStrings["conexion"].ConnectionString;
             SqlConnection conexion = new SqlConnection(rutaconexion);
